@@ -11,6 +11,7 @@ require('./db/dbInit')
 
 //Routes
 const authRouter = require('./routes/auth')
+const eventRouter = require('./routes/event')
 
 // Create server
 const server = express();
@@ -19,13 +20,19 @@ server.use(helmet());
 server.use(compression()); //Compress all routes
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: true }));
-server.use(cors())
+server.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+server.use(cors());
 
 server.get('/test',(req,res)=>{
-    res.send('bawitabadebangdebangdiigydiggy')
+    res.send('mdis 4 life')
   })
 
-server.use('/auth',authRouter)
+  server.use('/auth',authRouter)
+  server.use('/events',eventRouter)
 
   // Handle errors by returning JSON
 server.use((error, req, res, next) => {

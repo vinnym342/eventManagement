@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: "https://api-eventhandler.herokuapp.com/"//process.env.REACT_APP_API_URL
+    baseURL: "http://localhost:8085/"//process.env.REACT_APP_API_URL
 })
 
 export function setApiToken(token) {
