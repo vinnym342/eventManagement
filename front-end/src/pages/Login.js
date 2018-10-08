@@ -9,9 +9,11 @@ export default class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      createAccount: false,
+      createAccount: true,
       email: 'finance@gmail.com',
       password: 'asdfasdf',
+      firstName: 'Chuck',
+      lastName: 'Norris',
       loading: false
     }
   }
@@ -20,8 +22,10 @@ export default class LoginPage extends Component {
   // Get values from the field
   const email = this.state.email
   const password = this.state.password
+  const firstName = this.state.firstName
+  const lastName= this.state.lastName
   // Call the callback function with our values
-  callback({ email, password })
+  callback({ email, password,firstName,lastName })
   }
 
   //handle user input and set password and email state
@@ -34,12 +38,6 @@ export default class LoginPage extends Component {
   handleAccountChange = () => this.setState({
     createAccount: !this.state.createAccount
   })
-
-  changeLoading = (loading) => {
-    this.setState({
-      loading
-    })
-  }
 
   componentDidMount() {
     // init google auth
@@ -59,10 +57,8 @@ export default class LoginPage extends Component {
             />
           </a> */}
         </div>
-        <div className='welcome-container'>
-          { this.state.loading ? (
-            <CircularProgress />
-            ) : (
+        {!!this.state.createAccount ? (
+        <div className="welcome-container">
               <div className='login-dialog'>
                 <img
                   src={ logo }
@@ -95,6 +91,7 @@ export default class LoginPage extends Component {
                       type='password'
                     />
                   </div>
+                  <div>
                   <RaisedButton
                     className='login-button'
                     label='Log in'
@@ -102,14 +99,99 @@ export default class LoginPage extends Component {
                       () => this.submitToAuth(this.props.onSignIn)
                     }
                   />
+                  <br/>
+                  <RaisedButton
+                    className='create-account-button'
+                    label='Create'
+                    onClick={this.handleAccountChange}
+                  />
+                  </div>
                   <div className='login-divider'>
                     <Divider />
                   </div>
                 </div>
               </div>
-            )
+              <div/>
+              </div>
+              ):(<div className="welcome-container-create">
+              
+              <div className='login-dialog'>
+                <img
+                  src={ logo }
+                  alt='logo'
+                  className='wimo-login-logo' />
+                <div>
+                  <div className='element'></div>
+                  <div className='login-text-fields'>
+                    <TextField
+                      id='email'
+                      floatingLabelText='Email'
+                      fullWidth={ true }
+                      onChange={ this.onInputChange }
+                      onEnterKeyDown={
+                        () => this.submitToAuth(this.props.onRegister)
+                      }
+                      value={ this.state.email }
+                      hintText='Email'
+                    />
+                    <TextField
+                      id='password'
+                      floatingLabelText='Password'
+                      fullWidth={ true }
+                      onChange={ this.onInputChange }
+                      onEnterKeyDown={
+                        () => this.submitToAuth(this.props.onRegister)
+                      }
+                      value={ this.state.password }
+                      hintText='Password'
+                      type='password'
+                    />
+                    <TextField
+                      id='firstName'
+                      floatingLabelText='First Name'
+                      fullWidth={ true }
+                      onChange={ this.onInputChange }
+                      onEnterKeyDown={
+                        () => this.submitToAuth(this.props.onRegister)
+                      }
+                      value={ this.state.firstName }
+                      hintText='First Name'
+                    />
+                    <TextField
+                      id='lastName'
+                      floatingLabelText='Last Name'
+                      fullWidth={ true }
+                      onChange={ this.onInputChange }
+                      onEnterKeyDown={
+                        () => this.submitToAuth(this.props.onRegister)
+                      }
+                      value={ this.state.lastName }
+                      hintText='Last Name'
+                    />
+                  </div>
+                  <div>
+                  <RaisedButton
+                    className='login-button'
+                    label='Register'
+                    onClick={
+                      () => this.submitToAuth(this.props.onRegister)
+                    }
+                  />
+
+                  <RaisedButton
+                    className='create-account-button'
+                    label='Log in'
+                    onClick={this.handleAccountChange}
+                  />
+                  </div>
+                  <div className='login-divider'>
+                    <Divider />
+                  </div>
+                </div>
+              </div>
+              </div>
+              )
           }
-        </div>
       </div>
     )
   }

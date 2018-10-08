@@ -68,6 +68,15 @@ div.login-modal-actions {
   min-width: 300px;
   margin: auto; }
 
+.welcome-container-create {
+  position: absolute;
+  left: 7.5vw;
+  height: 500px;
+  width: 390px;
+  max-width: 90%;
+  min-width: 300px;
+  margin: auto; }
+
 .login-dialog {
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
@@ -77,7 +86,7 @@ div.login-modal-actions {
   border: 1px; }
 
 .login-button {
-  width: 85%;
+  width: 50;
   margin: 7px 0 7px;
   min-width: 150px; }
 

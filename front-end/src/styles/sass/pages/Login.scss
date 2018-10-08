@@ -49,6 +49,17 @@
   margin: auto;
 }
 
+.welcome-container-create {
+  position: absolute;
+  // bottom: 120px;
+  left: 7.5vw;
+  height: 500px;
+  width: 390px;
+  max-width: 90%;
+  min-width: 300px;
+  margin: auto;
+}
+
 .login-dialog {
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
@@ -59,7 +70,7 @@
 }
 
 .login-button {
-  width: 85%;
+  width: 50;
   margin: 7px 0 7px;
   min-width: 150px;
 }

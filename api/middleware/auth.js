@@ -54,15 +54,22 @@ passport.use(
   )
 )
 
-function registerMiddleware(req, res, next) {
+ function registerMiddleware(req, res, next) {
+  console.log(req.body)
   const user = new User({ email: req.body.email,employeeId: req.body.employeeId })
-  User.register(user, req.body.password, (error) => {
+  User.register(user, req.body.password, async (error) => {
     if (error) {
       console.error(error)
       next(error)
       return
     }
     req.user = user
+    let bat = await global.Personal.create({
+      userID: user._id,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+    })
+
     next()
   })
 }

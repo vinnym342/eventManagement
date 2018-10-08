@@ -22,7 +22,7 @@ router
 .post(authMiddleware.authenticateSignIn, authMiddleware.signTokenHandler)
 
 // Register
-router.post('/register', authMiddleware.register, authMiddleware.signTokenHandler)
+router.post('/register',authMiddleware.register, authMiddleware.signTokenHandler)
 
 // Mainly for dev
 router.delete('/collection', authMiddleware.dropCollection)

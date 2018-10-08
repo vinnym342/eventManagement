@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { ToastContainer, toast } from 'react-toastify'
 import { setApiToken } from './api/init'
 import * as authAPI from './api/auth'
-import injectTapEventPlugin from 'react-tap-event-plugin'
 import 'react-toastify/dist/ReactToastify.min.css'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import './custom.css'
@@ -12,7 +11,10 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
+
+// Pages
 import LoginPage from './pages/Login'
+import HomePage from './pages/Home'
 import NavBar from '../src/components/molecules/NavBar';
 
 import logo from './logo.svg';
@@ -20,7 +22,8 @@ import './App.css';
 
 //Token and storing
 const tokenKey = 'userToken'
-const savedToken = localStorage.getItem(tokenKey)
+// const savedToken = localStorage.getItem(tokenKey)
+const savedToken = null
 setApiToken(savedToken)
 // injectTapEventPlugin()
 
@@ -30,15 +33,15 @@ class App extends Component {
   state = {
     token: savedToken,
     error: null,
-    createAccount: false
+    createAccount: true
   }
 
   handleError = (error) => {
+    // console.log(error)
     toast.error(error)
   }
 
   handleSignIn = ({ email, password }) => {
-    console.log("whyyyyy")
     authAPI.signIn({ email, password })
       .then(json => {
 
@@ -50,8 +53,8 @@ class App extends Component {
       })
   }
 
-  handleRegister = ({ email, password }) => {
-    authAPI.register({ email, password })
+  handleRegister = ({ email, password,firstName,lastName }) => {
+    authAPI.register({ email, password,firstName,lastName })
       .then(json => {
         this.setToken(json.token)
       })
@@ -104,16 +107,15 @@ class App extends Component {
             <Switch>
               { !!this.state.token ?
                 (
-                  <h1>Haiiii</h1>
-                  // <Route
-                  //   path='/'
-                  //   render={
-                  //     ({location}) => <HomePage
-                  //       pathname={location.pathname.substring(1)}
-                  //       handleError={ this.handleError }
-                  //     />
-                  //   }
-                  // />
+                  <Route
+                    path='/'
+                    render={
+                      ({location}) => <HomePage
+                        pathname={location.pathname.substring(1)}
+                        handleError={ this.handleError }
+                      />
+                    }
+                  />
                 ) : (
                   // <h1>"Login"</h1>
                   <Route

@@ -12,10 +12,11 @@ require('./db/dbInit')
 //Routes
 const authRouter = require('./routes/auth')
 const eventRouter = require('./routes/event')
+const userRouter = require('./routes/personal')
 
 // Create server
 const server = express();
-
+const authMiddleware = require('./middleware/auth')
 server.use(helmet());
 server.use(compression()); //Compress all routes
 server.use(bodyParser.json())
@@ -31,8 +32,24 @@ server.get('/test',(req,res)=>{
     res.send('mdis 4 life')
   })
 
+  server.use('/dbDrop',(res,req)=>{
+    global.User.remove({}, function(err) {
+      console.log('collection removed')
+   })
+    global.Venue.remove({}, function(err) {
+      console.log('collection removed')
+   })
+    global.Event.remove({}, function(err) {
+      console.log('collection removed')
+   })
+    global.Personal.remove({}, function(err) {
+      console.log('collection removed')
+   })
+   res.json({hm: 'bwah'})
+  })
   server.use('/auth',authRouter)
   server.use('/events',eventRouter)
+  server.use('/personal',authMiddleware.authenticateJWT,userRouter)
 
   // Handle errors by returning JSON
 server.use((error, req, res, next) => {
