@@ -5,10 +5,12 @@ const authMiddleware = require('../middleware/auth')
 const router = express.Router()
 
 router
-.route('/')
+.route('/venues')
 // Get logged in user’s details
-.get((req, res) => {
-    // global.User
+.get(async (req, res) => {
+    let venues = await global.Venue.find()
+    res.json(venues)
 })
+
 
 module.exports = router

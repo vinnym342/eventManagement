@@ -5,14 +5,14 @@ const mongoose = require('mongoose');
 const compression = require('compression');
 const helmet = require('helmet');
 
-
 //Init
 require('./db/dbInit')
 
 //Routes
 const authRouter = require('./routes/auth')
 const eventRouter = require('./routes/event')
-const userRouter = require('./routes/personal')
+const personalRouter = require('./routes/personal')
+const testRouter = require('./routes/test')
 
 // Create server
 const server = express();
@@ -27,10 +27,6 @@ server.use(function(req, res, next) {
   next();
 });
 server.use(cors());
-
-server.get('/test',(req,res)=>{
-    res.send('mdis 4 life')
-  })
 
   server.use('/dbDrop',(res,req)=>{
     global.User.remove({}, function(err) {
@@ -48,8 +44,9 @@ server.get('/test',(req,res)=>{
    res.json({hm: 'bwah'})
   })
   server.use('/auth',authRouter)
-  server.use('/events',eventRouter)
-  server.use('/personal',authMiddleware.authenticateJWT,userRouter)
+  server.use('/test',testRouter)
+  server.use('/event',eventRouter)
+  server.use('/personal',authMiddleware.authenticateJWT,personalRouter)
 
   // Handle errors by returning JSON
 server.use((error, req, res, next) => {

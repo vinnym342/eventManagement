@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {getUserDetails} from "./../api/user"
 import CircularProgress from 'material-ui/CircularProgress';
+import CreateEventDialog from '../components/atoms/CreateEventDialog';
+// import CreateEventDialog from '../components/atoms/Test';
 
 export default class LoginPage extends Component {
 
@@ -25,7 +27,10 @@ export default class LoginPage extends Component {
     return (
       <div>
         {this.state.details ? (
-        <h1>Haiiiiii {this.state.details.firstName}</h1>
+        <div>
+          <h1>Haiiiiii {this.state.details.firstName}</h1>
+          <CreateEventDialog/>
+        </div>
       ):(
         <CircularProgress/>
       )}

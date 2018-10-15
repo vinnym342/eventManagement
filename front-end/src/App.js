@@ -17,13 +17,12 @@ import LoginPage from './pages/Login'
 import HomePage from './pages/Home'
 import NavBar from '../src/components/molecules/NavBar';
 
-import logo from './logo.svg';
 import './App.css';
 
 //Token and storing
 const tokenKey = 'userToken'
-// const savedToken = localStorage.getItem(tokenKey)
-const savedToken = null
+const savedToken = localStorage.getItem(tokenKey)
+// const savedToken = null
 setApiToken(savedToken)
 // injectTapEventPlugin()
 
@@ -35,7 +34,7 @@ class App extends Component {
     error: null,
     createAccount: true
   }
-
+  
   handleError = (error) => {
     // console.log(error)
     toast.error(error)

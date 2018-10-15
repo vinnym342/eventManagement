@@ -8,6 +8,11 @@ const eventSchema = mongoose.Schema({
   // }
   name: String,
   description: String,
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+    required: true,
+  },
   venueId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Venue',

@@ -8,10 +8,12 @@ const api = axios.create({
 api.interceptors.response.use(undefined, err => {
   const error = err.response;
   // if error is 401 
-  if (error.status===401 && error.config && 
-  !error.config.__isRetryRequest) {
-    console.log('ahsudfjhdjfn')
-  } 
+  if(error){
+    if (error.status===401 && error.config && 
+      !error.config.__isRetryRequest) {
+        console.log('ahsudfjhdjfn')
+      } 
+  }
 });
 
 export function setApiToken(token) {
