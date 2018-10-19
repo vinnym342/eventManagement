@@ -54,9 +54,9 @@ passport.use(
   )
 )
 
- function registerMiddleware(req, res, next) {
+function registerMiddleware(req, res, next) {
   console.log(req.body)
-  const user = new User({ email: req.body.email,employeeId: req.body.employeeId })
+  const user = new User({ email: req.body.email})
   User.register(user, req.body.password, async (error) => {
     if (error) {
       console.error(error)
@@ -75,13 +75,13 @@ passport.use(
 }
 
 function dropCollection(req, res, next) {
-  User.remove({}, function(err) {
-    if(err){
+  User.remove({}, function (err) {
+    if (err) {
       res.send('Couldnt remove collection')
     } else {
       res.send('collection removed')
     }
-});
+  });
 }
 
 module.exports = {

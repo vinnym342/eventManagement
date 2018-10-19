@@ -1,7 +1,11 @@
 const mongoose = require('./init').mongoose
 
 const personalSchema = mongoose.Schema({
-  userID: String,
+  userID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
   firstName: String,
   lastName: String,
 })

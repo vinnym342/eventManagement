@@ -10,7 +10,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Dialog from "material-ui/Dialog";
+import Dialog, { DialogActions } from "material-ui/Dialog";
 
 function sortVenues(venues) {
   let returnVenues = []
@@ -151,9 +151,17 @@ export default class SelectDevices extends React.Component {
 
               </Paper>
             ) : <CircularProgress />}
-          </div>
-        </Dialog>
 
+          </div>
+          {/* <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Disagree
+            </Button>
+            <Button onClick={this.handleClose} color="primary" autoFocus>
+              Agree
+            </Button>
+          </DialogActions> */}
+        </Dialog>
       </div>
     )
   }
